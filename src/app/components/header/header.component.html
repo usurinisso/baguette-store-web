@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="mat-toolbar-top">
+
+  <div fxShow="true" fxHide.gt-sm="true" class="example-spacer">
+
+    <fa-icon (click)="toggleSideBar()" [icon]="faBars"></fa-icon>
+
+  </div>
+
+  <span>Craft Baguettes ir KO.</span>
+
+  <span class="example-spacer"></span>
+
+  <div fxShow="true" fxHide.lt-md="true">
+    <nav>
+      <a *ngIf="!hasRoute('/login')" routerLink="/login" mat-button>Sig in/up</a>
+
+      <a *ngIf="!hasRoute('/')" routerLink="/" mat-button>Shops</a>
+
+      <a *ngIf="!hasRoute('/cart')" routerLink="/cart" mat-button>Cart</a>
+
+      <a *ngIf="!hasRoute('/orders')" routerLink="/orders" mat-button>Orders</a>
+
+      <a routerLink="/log-out" mat-button>Log out</a>
+    </nav>
+  </div>
+
+</mat-toolbar>

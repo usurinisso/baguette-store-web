@@ -1,0 +1,20 @@
+
+    <mat-sidenav fxLayout="column" >
+
+      <div fxLayout="column" >
+
+        <nav fxLayout="column">
+          <a *ngIf="!hasRoute('/login')" routerLink="/login" mat-button>Sig in/up</a>
+
+          <a *ngIf="!hasRoute('/')" routerLink="/" mat-button>Shops</a>
+
+          <a *ngIf="!hasRoute('/cart')" routerLink="/cart" mat-button>Cart</a>
+
+          <a *ngIf="!hasRoute('/orders')" routerLink="/orders" mat-button>Orders</a>
+
+          <a routerLink="/log-out" mat-button>Log out</a>
+        </nav>
+      </div>
+
+    </mat-sidenav>
+
