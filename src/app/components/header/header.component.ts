@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SideBarService } from '../../services/side-bar.service';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   faBars = faBars;
   private isSideBarOpen = false;
-  constructor(private sidenav: SideBarService, private router: Router) {}
+  constructor(
+    private sidenav: SideBarService,
+    private router: Router,
+    public auth: AuthenticationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -21,5 +26,9 @@ export class HeaderComponent implements OnInit {
   }
   hasRoute(route: string) {
     return this.router.url === route;
+  }
+
+  logOut(): void {
+    this.auth.logout();
   }
 }

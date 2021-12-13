@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SideBarService } from '../../services/side-bar.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,10 +12,14 @@ import { Router } from '@angular/router';
 export class SideBarComponent implements OnInit {
   @ViewChild(MatSidenav) sideBar!: MatSidenav;
 
-  constructor(private sidenav: SideBarService, private router: Router) {}
+  constructor(
+    private sidenav: SideBarService,
+    private router: Router,
+    public auth: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    this.sidenav.isOpen().subscribe((isOpen) => this.sideBar.toggle(isOpen));
+    this.sidenav.isOpen().subscribe((isOpen) => this.sideBar?.toggle(isOpen));
   }
 
   hasRoute(route: string) {

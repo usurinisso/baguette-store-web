@@ -12,15 +12,15 @@
 
   <div fxShow="true" fxHide.lt-md="true">
     <nav>
-      <a *ngIf="!hasRoute('/login')" routerLink="/login" mat-button>Sig in/up</a>
+      <a *ngIf="!hasRoute('/login') && !hasRoute('/register') && auth.currentUserValue===null" routerLink="/login" mat-button>Sig in/up</a>
 
-      <a *ngIf="!hasRoute('/')" routerLink="/" mat-button>Shops</a>
+      <a *ngIf="!hasRoute('/shops')" routerLink="/" mat-button>Shops</a>
 
-      <a *ngIf="!hasRoute('/cart')" routerLink="/cart" mat-button>Cart</a>
+      <a *ngIf="!hasRoute('/carts/'+auth.currentUserValue?.cart?.id) && !hasRoute('/carts')" routerLink="{{ (auth.currentUserValue?.roleType==='admin' || auth.currentUserValue?.roleType === 'vendor') ? '/carts' : '/carts/'+auth.currentUserValue?.cart?.id}}" mat-button>Cart</a>
 
       <a *ngIf="!hasRoute('/orders')" routerLink="/orders" mat-button>Orders</a>
 
-      <a routerLink="/log-out" mat-button>Log out</a>
+      <a *ngIf="auth.currentUserValue!==null" mat-button (click)="auth.logout()" routerLink="/">Log out</a>
     </nav>
   </div>
 

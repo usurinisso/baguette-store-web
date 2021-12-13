@@ -1,0 +1,37 @@
+<div>
+  <table mat-table [dataSource]="dataSource" fxFlexFill>
+
+    <ng-container matColumnDef="Nr.">
+      <th mat-header-cell *matHeaderCellDef> Nr. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Image">
+      <th mat-header-cell *matHeaderCellDef> Image </th>
+      <td mat-cell *matCellDef="let element"> <img fxFlexFill [src]="element.shopImage" /></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Work Hours">
+      <th mat-header-cell *matHeaderCellDef> Work Hours </th>
+      <td mat-cell *matCellDef="let element"> {{element.workHours}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="router.navigateByUrl('/shops/'+row.id)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[15, 50]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

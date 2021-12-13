@@ -1,0 +1,47 @@
+<mat-dialog-content fxFlexFill [formGroup]="form">
+  <nav fxLayout="row" fxLayoutAlign="space-around" >
+    <div >
+      <a *ngIf="!hasRoute('/login')" routerLink="/login" mat-button (click)="onNoClick()" >
+        <h1 mat-dialog-title>Sign in</h1>
+      </a>
+      <a *ngIf="!hasRoute('/register')" routerLink="/register" mat-button (click)="onNoClick()" >
+        <h1 mat-dialog-title>Sign up</h1>
+      </a>
+    </div>
+  </nav>
+
+  <div fxLayout="column" fxLayoutAlign="space-around">
+    <mat-form-field>
+      <input matInput required formControlName="firstName" placeholder="First name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required formControlName="lastName" placeholder="Last name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required formControlName="userName" placeholder="User name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required formControlName="password" placeholder="Password" type="password">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput required formControlName="passwordSecond" placeholder="Repeat password" type="password">
+    </mat-form-field>
+    <div *ngIf="otherError" style="color: red">
+      Missing required fields
+    </div>
+    <div *ngIf="passwordError" style="color: red">
+      Password must be at least 5 characters
+    </div>
+    <div *ngIf="passwordNoMatch && !otherError" style="color: red">
+      Passwords do not match
+    </div>
+    <div *ngIf="userExists && !otherError" style="color: red">
+      User with this username already exists
+    </div>
+  </div>
+
+  <div fxLayoutAlign="center" >
+    <button mat-raised-button color="primary" (click)="onLoginClick()">Register</button>
+  </div>
+
+</mat-dialog-content>

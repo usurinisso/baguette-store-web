@@ -1,0 +1,27 @@
+<div>
+  <table mat-table [dataSource]="dataSource" fxFlexFill>
+
+    <ng-container matColumnDef="Nr.">
+      <th mat-header-cell *matHeaderCellDef> Nr. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="User Name">
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.userName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Baguettes Count">
+      <th mat-header-cell *matHeaderCellDef> Baguettes Count </th>
+      <td mat-cell *matCellDef="let element"> {{element.baguettes.length}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="router.navigateByUrl('/carts/'+row.id)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[15, 50]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

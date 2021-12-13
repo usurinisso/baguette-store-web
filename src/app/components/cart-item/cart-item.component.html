@@ -1,0 +1,70 @@
+<div>
+  <table mat-table [dataSource]="dataSource" fxFlexFill>
+
+    <ng-container matColumnDef="Nr.">
+      <th mat-header-cell *matHeaderCellDef> Nr. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef> Price</th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="SizeCm">
+      <th mat-header-cell *matHeaderCellDef> Size in cm </th>
+      <td mat-cell *matCellDef="let element"> {{element.sizeCm}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Type">
+      <th mat-header-cell *matHeaderCellDef> Type</th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Condition">
+      <th mat-header-cell *matHeaderCellDef> Condition </th>
+      <td mat-cell *matCellDef="let element"> {{element.condition}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="BakedAt">
+      <th mat-header-cell *matHeaderCellDef> Baked At </th>
+      <td mat-cell *matCellDef="let element"> {{element.bakedAt}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[15, 50]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+
+  <div fxFlexFill style="font-size: 12px">
+    <mat-form-field fxFlexFill fxLayoutAlign="center">
+      <mat-label>Enter your delivery address</mat-label>
+      <input [(ngModel)]="da" required matInput >
+    </mat-form-field>
+
+    <mat-form-field fxFlexFill fxLayoutAlign="center">
+      <mat-label>Enter additional delivery info</mat-label>
+      <input [(ngModel)]="din" required matInput >
+    </mat-form-field>
+    <div *ngIf="!da || !din" style="color: red">
+      Missing required fields
+    </div>
+    <div style="font-size: 30px">
+    Total Price: {{totalPrice}} eur
+    <button mat-raised-button color="primary" (click)="order()">Order</button>
+    </div>
+  </div>
+
+  <div>
+  </div>
+</div>

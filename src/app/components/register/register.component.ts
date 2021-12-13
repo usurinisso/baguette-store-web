@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginFormComponent } from '../login-form/login-form.component';
 import { Router } from '@angular/router';
+import { RegisterFormComponent } from '../register-form/register-form.component';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
+  firstname: string;
+  lastname: string;
   username: string;
   password: string;
+  passwordSecond: string;
 
   constructor(public dialog: MatDialog, private router: Router) {}
 
@@ -19,14 +22,17 @@ export class LoginComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(LoginFormComponent, {
+    const dialogRef = this.dialog.open(RegisterFormComponent, {
       width: '400px',
-      height: '300px',
+      height: '500px',
       maxWidth: '400px',
-      maxHeight: '300px',
+      maxHeight: '500px',
       data: {
+        firstname: this.firstname,
+        lastname: this.lastname,
         username: this.username,
-        password: this.password
+        password: this.password,
+        passwordSecond: this.passwordSecond
       }
     });
 
