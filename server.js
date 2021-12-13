@@ -6,19 +6,16 @@ const app = express();
 
 // Serve only the static files form the dist directory
 
-const whitelist = [
-  'http://localhost:3000',
-  'https://baguette-store-web.herokuapp.com',
-  'https://baguette-store.herokuapp.com'
-]; // list of allow domain
-
+const whitelist = new RegExp(
+  '^((https?:\\/\\/)?.*?([\\w\\d-]*\\.[\\w\\d]+))($|\\/.*$)'
+);
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) {
       return callback(null, true);
     }
 
-    if (whitelist.indexOf(origin) === -1) {
+    if (!whitelist.test(origin)) {
       var msg =
         'The CORS policy for this site does not ' +
         'allow access from the specified Origin.';
