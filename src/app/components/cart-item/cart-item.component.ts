@@ -53,7 +53,7 @@ export class CartItemComponent implements OnInit {
     if (this.da && this.din) {
       await this.orderS
         .placeOrder({
-          userId: 1,
+          userId: this.auth.currentUserValue.id,
           deliveryAddress: this.da,
           deliveryInfo: this.din,
           baguetteIds: [1, 2]
