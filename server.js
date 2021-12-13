@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 
 // Serve only the static files form the dist directory
+app.use(cors());
 app.use(express.static(__dirname + '/dist/baguette-store-web'));
 
 app.get('/*', function (req, res) {
