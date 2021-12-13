@@ -6,28 +6,35 @@ const app = express();
 
 // Serve only the static files form the dist directory
 
-// const allowedOrigins = [
-//   'http://localhost:3000',
-//   'https://baguette-store-web.herokuapp.com',
-//   'https://baguette-store.herokuapp.com',
-//   'http://localhost:4200'
-// ]; // list of allow domain
-//
-// app.use(
-//   cors(
-//     app.use(
-//       cors({
-//         origin: (origin, callback) => {
-//           if (allowedOrigins.includes(origin)) {
-//             callback(null, true);
-//           } else {
-//             callback(new Error(`Origin: ${origin} is now allowed`));
-//           }
-//         }
-//       })
-//     )
-//   )
-// );
+const whitelist = [
+  'http://localhost:3000',
+  'http://baguette-store-web.herokuapp.com',
+  'http://baguette-store-web.herokuapp.com/shops',
+  'http://baguette-store-web.herokuapp.com/carts',
+  'http://baguette-store-web.herokuapp.com/orders',
+  'http://baguette-store-web.herokuapp.com/login',
+  'http://baguette-store-web.herokuapp.com/register',
+  'http://baguette-store-web.herokuapp.com',
+  'http://baguette-store.herokuapp.com'
+]; // list of allow domain
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (!whitelist.includes(origin)) {
+      var msg =
+        'The CORS policy for this site does not ' +
+        'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+};
+
+app.use(cors(corsOptions));
 app.use(express.static(__dirname + '/dist/baguette-store-web'));
 
 app.get('/*', function (req, res) {
