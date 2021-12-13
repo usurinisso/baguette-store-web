@@ -10,6 +10,13 @@ app.use(cors());
 app.use(express.static(__dirname + '/dist/baguette-store-web'));
 
 app.get('/*', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
+  );
   res.sendFile(path.join(__dirname + '/dist/baguette-store-web/index.html'));
 });
 
