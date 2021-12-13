@@ -28,7 +28,7 @@ const corsOptions = {
   }
 };
 
-app.use('*', cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.static(__dirname + '/dist/baguette-store-web'));
 
 app.get('/*', function (req, res) {
