@@ -9,7 +9,8 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',
   'https://baguette-store-web.herokuapp.com',
-  'https://baguette-store.herokuapp.com'
+  'https://baguette-store.herokuapp.com',
+  'http://localhost:4200'
 ]; // list of allow domain
 
 app.use(
@@ -32,14 +33,6 @@ app.use(express.static(__dirname + '/dist/baguette-store-web'));
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/baguette-store-web/index.html'));
-});
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
 });
 
 // Start the app by listening on the default Heroku port
