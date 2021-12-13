@@ -70,7 +70,6 @@
           "configurations": {
             "production": {
               "browserTarget": "baguette-store-web:build:production",
-              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "browserTarget": "baguette-store-web:build:development"
