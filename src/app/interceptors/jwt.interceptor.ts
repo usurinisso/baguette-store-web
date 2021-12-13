@@ -17,25 +17,11 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
-    request = request.clone({
-      setHeaders: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'false',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-        'Access-Control-Allow-Headers':
-          'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
-      }
-    });
     let currentUser = this.authenticationService.currentUserValue;
     if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'false',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-          'Access-Control-Allow-Headers':
-            'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
+          Authorization: `Bearer ${currentUser.token}`
         }
       });
     }
