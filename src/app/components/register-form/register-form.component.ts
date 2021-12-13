@@ -74,6 +74,7 @@ export class RegisterFormComponent implements OnInit {
 
       if (result === 200) {
         this.onNoClick();
+        this.router.navigateByUrl('/shops');
       }
 
       if (result === 500) {

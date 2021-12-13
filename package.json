@@ -2,9 +2,10 @@
   "name": "baguette-store-web",
   "version": "0.0.0",
   "scripts": {
+    "start": "node server.js",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "heroku-postbuild": "ng build -prod",
+    "build": "ng build -prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -31,6 +32,8 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

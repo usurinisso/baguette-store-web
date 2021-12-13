@@ -52,34 +52,42 @@ export class ShopItemComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Baguette>(baguettes);
         this.dataSource.paginator = this.paginator;
       });
-    const thisCart = this.auth.currentUserValue.cart?.id;
-    if (thisCart) {
-      this.cartS
-        .getCart(thisCart)
-        .subscribe((x) => (this.inCart = x.baguettes.map((x) => x.id)));
+    const user = this.auth.currentUserValue;
+    if (user) {
+      const thisCart = this.auth.currentUserValue.cart?.id;
+      if (thisCart) {
+        this.cartS
+          .getCart(thisCart)
+          .subscribe((x) => (this.inCart = x.baguettes.map((x) => x.id)));
+      }
     }
   }
 
   async addToCart(id: number) {
-    const thisCart = this.auth.currentUserValue.cart?.id;
-    if (thisCart) {
-      const cart = await firstValueFrom(this.cartS.getCart(thisCart));
+    const user = this.auth.currentUserValue;
+    if (user) {
+      const thisCart = this.auth.currentUserValue.cart?.id;
+      if (thisCart) {
+        const cart = await firstValueFrom(this.cartS.getCart(thisCart));
 
-      this.cartS
-        .patchCart(thisCart, [...cart.baguettes.map((x) => x.id), id])
-        .subscribe(async (x) => {
-          this.inCart.push(id);
-          const a = await this.prof.getUserProfile();
-          this.auth.setNewProf(a);
-        });
+        this.cartS
+          .patchCart(thisCart, [...cart.baguettes.map((x) => x.id), id])
+          .subscribe(async (x) => {
+            this.inCart.push(id);
+            const a = await this.prof.getUserProfile();
+            this.auth.setNewProf(a);
+          });
+      } else {
+        this.cartS
+          .postCart(this.auth.currentUserValue.id, [id])
+          .subscribe(async (x) => {
+            this.inCart.push(id);
+            const a = await this.prof.getUserProfile();
+            this.auth.setNewProf(a);
+          });
+      }
     } else {
-      this.cartS
-        .postCart(this.auth.currentUserValue.id, [id])
-        .subscribe(async (x) => {
-          this.inCart.push(id);
-          const a = await this.prof.getUserProfile();
-          this.auth.setNewProf(a);
-        });
+      this.router.navigateByUrl('/login');
     }
   }
 

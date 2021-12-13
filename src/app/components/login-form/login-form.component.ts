@@ -27,7 +27,6 @@ export class LoginFormComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close(true);
-    this.router.navigateByUrl('/');
   }
 
   async onLoginClick(): Promise<void> {
@@ -40,6 +39,7 @@ export class LoginFormComponent implements OnInit {
       );
       if (!response) {
         this.onNoClick();
+        this.router.navigateByUrl('/shops');
       }
 
       if (response === 401) {
