@@ -8,8 +8,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://baguette-store-web.herokuapp.com',
-    credentials: true
+    origin: '*',
+    credentials: false
   })
 );
 app.use(express.static(__dirname + '/dist/baguette-store-web'));

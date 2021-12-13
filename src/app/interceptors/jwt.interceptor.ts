@@ -19,9 +19,8 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     request = request.clone({
       setHeaders: {
-        'Access-Control-Allow-Origin':
-          'https://baguette-store-web.herokuapp.com',
-        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'false',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
         'Access-Control-Allow-Headers':
           'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
@@ -32,9 +31,8 @@ export class JwtInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${currentUser.token}`,
-          'Access-Control-Allow-Origin':
-            'https://baguette-store-web.herokuapp.com',
-          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'false',
           'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
           'Access-Control-Allow-Headers':
             'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
